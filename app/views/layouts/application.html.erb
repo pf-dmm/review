@@ -22,13 +22,28 @@
         <%= link_to 'ユーザ一覧', users_path, class: "nav-item nav-link " %>
       </li>
       <li class="nav-item">
-        <%= link_to 'ポートフォリオ一覧', port_folios_path, class: "nav-item nav-link " %>
+        <%= link_to 'ポートフォリオ一覧', portfolios_path, class: "nav-item nav-link " %>
       </li>
       <li class="nav-item">
         <%= link_to 'マイページ', user_path(current_user), class: "nav-item nav-link " %>
       </li>
       <li class="nav-item">
+        <%= link_to 'PF投稿', new_portfolio_path, class: "nav-item nav-link " %>
+      </li>
+      <li class="nav-item">
         <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "nav-item nav-link " %>
+      </li>
+    </ul>
+    <% elsif admin_signed_in? %>
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <%= link_to 'ユーザ一覧', admin_users_path, class: "nav-item nav-link " %>
+      </li>
+      <li class="nav-item">
+        <%= link_to 'ポートフォリオ一覧', admin_portfolios_path, class: "nav-item nav-link " %>
+      </li>
+      <li class="nav-item">
+        <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: "nav-item nav-link " %>
       </li>
     </ul>
     <% else %>

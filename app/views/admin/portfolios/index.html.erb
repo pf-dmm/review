@@ -5,27 +5,15 @@
      <table class="table table-hover">
   　　　<thead>
     　<tr>
-        <th scope="col">会員ID</th>
-        <th scope="col">氏名</th>
-        <th scope="col">メールアドレス</th>
-        <th scope="col">ステータス</th>
+        <th scope="col">PFid</th>
+        <th scope="col">PF名</th>
    　  </tr>
       </thead>
   　　<tbody>
-  　　  <% @users.each do |user| %>
+  　　  <% @portfolios.each do |portfolio| %>
         <tr>
-          <th scope="row"><%= user.id %></th>
-          <td><%= link_to admin_user_path(user.id) do %><%= user.last_name %><%= user.first_name %><% end %></td>
-          <td><%= user.email %></td>
-          <td>
-            <td>
-              <% if user.is_deleted %>
-                <p class="text-secondary"><%= "退会" %></p>
-              <% else %>
-                <p class="text-success"><%= "有効" %></p>
-              <% end %>
-           </td>
-          </td>
+          <th scope="row"><%= portfolio.id %></th>
+          <td><%= link_to admin_portfolios_path(portfolio.id) do %><%= portfolio.title %><% end %></td>
         </tr>
         <% end %>
       </tbody>
@@ -33,9 +21,5 @@
     </div>
     <div class="col-2"></div>
   </div>
-  <div class="row">
-    <div class="col-5"></div>
-    <div class="paginate col-4"><%= paginate @users %></div>
-    </div>
   </div>
 </div>
