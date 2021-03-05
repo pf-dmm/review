@@ -1,2 +1,79 @@
-<h1>Portfolios#show</h1>
-<p>Find me in app/views/portfolios/show.html.erb</p>
+<div class="container">
+  <div class="row d-flex justify-content-center">
+    <div class="col-6">
+      <h3>ポートフォリオ名</h3>
+      <div><%= @portfolio.title %></div>
+    </div>
+    <div class="col-6">
+      <div><%= @portfolio.title %><%= attachment_image_tag @portfolio, :image, size: "100x100", fallback: "no-image.jpg" %></div>
+    </div>
+    <div class="col-6">
+      <div>
+        <% @portfolio.tags.each do |tag| %>
+          <%= tag.tag_name %>
+        <% end %>
+    　</div>
+    </div>
+    <div class="col-12">
+      <h4>ステータス</h4>
+      <div>
+        <% if @portfolio.signin_ok == true %>
+          <span class="badge badge-success">ログインOK</span>
+        <% else %>
+          <span class="badge badge-danger">ログインNG</span>
+        <% end %>
+        <% if @portfolio.signup_ok == true %>
+          <span class="badge badge-success">新規登録OK</span>
+        <% else %>
+          <span class="badge badge-danger">新規登録NG</span>
+        <% end %>
+        <% if @portfolio.instance == true %>
+          <span class="badge badge-success">サイト閲覧可能状態</span>
+        <% else %>
+          <span class="badge badge-danger">サイト閲覧停止中</span>
+        <% end %>
+        <% if @portfolio.share_others == true %>
+          <span class="badge badge-success">公開OK</span>
+        <% else %>
+          <span class="badge badge-danger">公開NG</span>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-12">
+      <h3>サイトURL</h3>
+      <div><%= @portfolio.site_url %></div>
+    </div>
+    <div class="col-12">
+      <h3>github URL</h3>
+      <div><%= @portfolio.git_hub_url %></div>
+    </div>
+    <div class="col-12">
+      <h3>制作背景</h3>
+      <div><%= @portfolio.background_story %></div>
+    </div>
+    <div class="col-12">
+      <h3>ターゲット</h3>
+      <div><%= @portfolio.target %></div>
+    </div>
+    <div class="col-12">
+      <h3>工夫した点</h3>
+      <div><%= @portfolio.ingenuity_point %></div>
+    </div>
+    <div class="col-12">
+      <h3>苦労した点</h3>
+      <div><%= @portfolio.difficult_point %></div>
+    </div>
+    <div class="col-12">
+      <h3>学んだこと</h3>
+      <div><%= @portfolio.learn_point %></div>
+    </div>
+    <div class="col-12">
+      <h3>今後実装したい機能</h3>
+      <div><%= @portfolio.wanna_install %></div>
+    </div>
+    <div class="col-12">
+      <h3>レビュー者に伝えたいこと</h3>
+      <div><%= @portfolio.remarks %></div>
+    </div>
+  </div>
+</div>

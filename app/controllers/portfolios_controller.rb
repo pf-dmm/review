@@ -4,20 +4,23 @@ class PortfoliosController < ApplicationController
   end
 
   def create
-    portfolio = Portfolio.new(portfolio_params)
-    portfolio.user_id = current_user.id
-    if portfolio.save
-      redirect_to portfolio_path(portfolio)
+    @portfolio = Portfolio.new(portfolio_params)
+    @portfolio.user_id = current_user.id
+    tag_list = params[:portfolio][:tag_name].split(nil)
+    if @portfolio.save
+      @portfolio.save_tag(tag_list)
+      redirect_to portfolio_path(@portfolio)
     else
       render "portfolios/new"
     end
   end
 
   def index
+    @portfolios = Portfolio.all
   end
 
   def show
-    @portfolio = PortFolio.find(params[:id])
+    @portfolio = Portfolio.find(params[:id])
   end
 
   def edit

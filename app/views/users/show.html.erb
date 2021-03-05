@@ -1,14 +1,19 @@
 <div class="container">
-  <div class="row">
-    <div class="col-4">
-      <div class="user-info mt-4">
-        <div class="col-4-offset d-flex justify-content-center"><%= attachment_image_tag @user, :profile_image, size: "72x72", fallback: "no-user-image.png" %></div>
-        <div class="col-4-offset d-flex justify-content-center mt-2"><%= @user.name %></div>
-        <div class="col-10-offset d-flex justify-content-center"><%= @user.introduction %></div>
+  <div class="row mt-5">
+    <div class="col-2"></div>
+      <div class="left col-4"><%= attachment_image_tag @user, :profile_image, size: "150x150", fallback: "no-user-image.png" %></div>
+      <div class="col-4">
+        <div class=""><h1><%= @user.name %></h1></div>
+        <div class=""><%= @user.introduction %></div>
+        <div><%= link_to "ユーザ編集", edit_user_path(@user) %></div>
       </div>
-    </div>
-    <div class="col-8">
-      <!--ポートフォリオの一覧＆投稿ブログの一覧-->
-    </div>
+    <div class="col-2"></div>
   </div>
+  <div class="row">
+
+    <div class="col-12"><h3>my portfolio</h3></div>
+    <div class="col-12 ml-5"><%= link_to portfolio_path(@user.portfolio) do %><h3><%= @user.portfolio.title %></h3><% end %></div>
+  </div>
+
+
 </div>
