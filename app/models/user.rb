@@ -6,5 +6,15 @@ class User < ApplicationRecord
 
   attachment :profile_image
 
+  has_many :messages, dependent: :destroy
+  has_many :entries, dependent: :destroy
   has_one :portfolio
+
+  def self.search(search)
+    if search
+      User.where("name LINK?", "%#{search}%")
+    else
+      User.all
+    end
+  end
 end

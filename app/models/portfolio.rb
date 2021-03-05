@@ -19,4 +19,12 @@ class Portfolio < ApplicationRecord
       self.tags << new_tag
     end
   end
+
+  def self.search(search)
+    if search
+      Portfolio.where("name LINK?", "%#{search}%")
+    else
+      Portfolio.all
+    end
+  end
 end

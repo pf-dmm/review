@@ -1,1 +1,9 @@
 ポルタ
+<div class="container">
+    <div class="row">
+        <div class="border rounded"></div>
+        <% @portfolios.each do |portfolio|%>
+          <div class="col-12"><%= portfolio.title %> </div>
+        <% end %>
+    </div>
+</div>
