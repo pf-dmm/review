@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_04_130000) do
+ActiveRecord::Schema.define(version: 2021_03_07_112503) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -37,13 +37,14 @@ ActiveRecord::Schema.define(version: 2021_03_04_130000) do
   create_table "pf_reviews", force: :cascade do |t|
     t.integer "reviewer_user_id", null: false
     t.integer "reviewed_user_id", null: false
-    t.integer "port_folio_id", null: false
+    t.integer "portfolio_id", null: false
     t.text "good_point", null: false
     t.text "bad_point", null: false
     t.text "learn_from", null: false
     t.text "others"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "review_each_other", default: false, null: false
   end
 
   create_table "portfolios", force: :cascade do |t|

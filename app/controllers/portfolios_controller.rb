@@ -1,4 +1,6 @@
 class PortfoliosController < ApplicationController
+  protect_from_forgery :except => [:create]
+
   def new
     @portfolio = Portfolio.new
   end

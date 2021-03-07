@@ -10,10 +10,72 @@
     <div class="col-2"></div>
   </div>
   <div class="row">
-
     <div class="col-12"><h3>my portfolio</h3></div>
     <div class="col-12 ml-5"><%= link_to portfolio_path(@user.portfolio) do %><h3><%= @user.portfolio.title %></h3><% end %></div>
   </div>
-
-
+  <div class="row">
+    <div class="my-page-right-bottom">
+      <ul class="tabnav">
+        <li><a href="#tab01"><%= @user.portfolio.title %>へのレビュー</a></li>
+        <li><a href="#tab02">自分からのレビュー</a></li>
+        <li><a href="#tab03">未返信のレビュー</a></li>
+      </ul>
+      <div class="tabcontent">
+          <div class="content1" id="tab01">
+          <% @review_to_me.each do |pf_review| %>
+            <% if pf_review.review_each_other %>
+              <div class="col-8 border d-flex">
+                <% user = User.find(pf_review.reviewer_user_id) %>
+                <div><%= attachment_image_tag user, :profile_image, size: "50x50", fallback: "no-user-image.png" %></div>
+                <div class="title"><%= user.name %>さんからのレビュー</div>
+                <div class="check"><%= link_to "レビューを確認する", pf_review_path(pf_review), class: "btn btn-success" %></div>
+              </div>
+            <% else %>
+              <div class="col-8 border d-flex">
+                <% user = User.find(pf_review.reviewer_user_id) %>
+                <div><%= attachment_image_tag user, :profile_image, size: "50x50", fallback: "no-user-image.png" %></div>
+                <div class="title"><%= user.name %>さんからのレビュー</div>
+                <div class="check"><%= link_to "レビューを返す", new_pf_review_path(portfolio_id: user.portfolio.id), class: "btn btn-danger" %></div>
+              </div>
+            <% end %>
+          <% end %>
+          </div>
+          <div class="content2" id="tab02">
+            <% @review_from_me.each do |pf_review| %>
+            <% if pf_review.review_each_other %>
+              <div class="col-8 border d-flex">
+                <% user = User.find(pf_review.reviewed_user_id) %>
+                <div><%= attachment_image_tag user, :profile_image, size: "50x50", fallback: "no-user-image.png" %></div>
+                <div class="review"><%= user.portfolio.title %></div>
+                <div class="title"><%= user.name %>さんへのレビュー</div>
+                <div class="check"><%= link_to "レビューを確認する", pf_review_path(pf_review), class: "btn btn-success" %></div>
+              </div>
+            <% else %>
+              <div class="col-8 border d-flex">
+                <% user = User.find(pf_review.reviewer_user_id) %>
+                <div><%= attachment_image_tag user, :profile_image, size: "50x50", fallback: "no-user-image.png" %></div>
+                <div class="review"><%= user.portfolio.title %>へのレビュー</div>
+                <div><p class="btn btn-danger">レビュー待ち</p></div>
+              </div>
+            <% end %>
+            <% end %>
+          </div>
+          <div class="content3" id="tab03">
+          <% @review_to_me.each do |pf_review| %>
+            <% if pf_review.review_each_other == false %>
+              <div class="col-8 border d-flex">
+                <% user = User.find(pf_review.reviewer_user_id) %>
+                <div><%= attachment_image_tag user, :profile_image, size: "50x50", fallback: "no-user-image.png" %></div>
+                <div class="title"><%= user.name %>さんからのレビュー</div>
+                <div class="check"><%= link_to "レビューを返す", new_pf_review_path(portfolio_id: user.portfolio.id), class: "btn btn-danger" %></div>
+              </div>
+            <% else %>
+            未返信のレビューはありません
+            <% end %>
+          <% end %>
+          </div>
+      </div>
+    </div>
+  </div>
 </div>
+
