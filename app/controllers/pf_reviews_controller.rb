@@ -1,4 +1,7 @@
 class PfReviewsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :configure_post
+
   def new
     @portfolio = Portfolio.find(params[:portfolio_id])
     @pf_review = PfReview.new

@@ -25,7 +25,7 @@
 }
 .tabnav li a{
   display: inline-block;
-  background: #405dca;
+  background: black;
   color: #fff;
   padding: 10px;
   border-radius: 5px 5px 0 0;
@@ -34,18 +34,18 @@
 .tabnav li a:hover,
 .tabnav li a.active{
   background: #ddd;
-  color: #333;
+  color: black;
 }
 .tabcontent{
   padding: 20px;
   border: 1px dotted #ccc;
 }
- 
+
  .header-icon {
   font-size: 55px;
   font-weight: bold;
  }
- 
+
  .top-link {
   display: block;
   margin: 0 0 0 1200px;
@@ -54,26 +54,25 @@
   font-size: 20px;
 
   }
-  
+
   .selected-item {
     padding: 50px 0;
   }
-  
+
   .selected-title {
     font-size: 45px;
     font-weight: bold;
 
   }
-  
+
  .nav-link {
   font-size: 22px;
   color: black;
   font-weight: bold;
   margin: 0 15px;
  }
- 
+
  .pf-list {
    list-style: none;
  }
 
- 

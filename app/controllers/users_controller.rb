@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+    before_action :configure_post, except: [:index]
+    before_action :authenticate_user!
+
   def index
     @users = User.search(params[:search])
   end
@@ -33,8 +36,7 @@ class UsersController < ApplicationController
   def update
     user = User.find(params[:id])
     user.update(user_params)
-    redirect_to "/"
-
+    redirect_to user_path(user)
   end
 
   private

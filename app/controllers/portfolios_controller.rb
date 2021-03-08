@@ -1,4 +1,6 @@
 class PortfoliosController < ApplicationController
+  before_action :configure_post, only: [:show, :edit]
+  before_action :authenticate_user!
   protect_from_forgery :except => [:create]
 
   def new
