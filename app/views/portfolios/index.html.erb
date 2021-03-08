@@ -1,6 +1,6 @@
 <div class="header-top">
   <% if user_signed_in? %>
-  <%= link_to user_path(current_user), class: "top-link" do %>マイページ<% end %>
+  <%= link_to user_path(current_user), class: "top-link pt-3" do %>マイページ<% end %>
   <% end %>
   <p class="header-icon pl-5" href="/">PORTA</p>
 </div>
@@ -26,15 +26,18 @@
 
   <div class="selected-item">
     <a class="selected-title pl-5">ポートフォリオ一覧</a><br />
-    なぜ多くのポートフォリオに触れることが良いのか？を書く
+    <a class="pl-5">アプリ名で検索ができます</a>
   </div>
 
-
-  <div class="my-2 mx-5">
+  <div>
     <%= form_tag(portfolios_path, method: :get) do %>
+    <div class="input-group my-2 mx-auto px-5">
       <%= text_field_tag :search, '',  placeholder: "Search Portfolios", class: "form-control form-control-lg" %>
-        <%= submit_tag "検索" %>
-    <% end %>
+        <span class="input-group-btn my-2">
+        <%= submit_tag "検索", class: "btn btn-primary" %>
+        </span>
+      <% end %>
+    </div>
   </div>
 
   <div>

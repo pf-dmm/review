@@ -25,9 +25,11 @@ class PortfoliosController < ApplicationController
 
   def show
     @portfolio = Portfolio.find(params[:id])
+    @user = @portfolio.user
   end
 
   def edit
+    @portfolio = Portfolio.find(params[:id])
   end
 
   private
