@@ -1,2 +1,31 @@
-<h1>PfReviews#new</h1>
-<p>Find me in app/views/pf_reviews/new.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+      <h1><%= @portfolio.title %>に対するレビュー</h1>
+    <%= form_with model: @pf_review, url: pf_reviews_path, method: :post,local: true do |f|%>
+      <div class="form-group">
+      <%= f.label "いい点" %> <span class="badge badge-danger">必須</span>
+      <%= f.text_field :good_point, class: "form-control" %>
+      <div class="form-group">
+      <%= f.label "改善点" %> <span class="badge badge-danger">必須</span>
+      <%= f.text_field :bad_point, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label "このPFから学べたこと" %> <span class="badge badge-danger">必須</span>
+      <%= f.text_field :learn_from, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label "その他制作者に伝えたいこと" %>
+      <%= f.text_field :others, class: "form-control" %>
+    </div>
+    </div>
+    <%= f.hidden_field :portfolio_id , value: @portfolio.id %>
+    <div class="submit_bottom_group">
+    <%= f.submit "入力内容を送信する", class: "btn btn-success" %>
+    </div>
+    <% end %>
+    </div>
+    <div class="col-2"></div>
+  </div>
+</div>

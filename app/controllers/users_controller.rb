@@ -5,6 +5,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @review_from_me = PfReview.where(reviewer_user_id: current_user) #自分がしたレビュー
+    @review_to_me = PfReview.where(reviewed_user_id: current_user) #自分のPFに対するレビュー
     @currentUserEntry = Entry.where(user_id: current_user.id)
     @userEntry = Entry.where(user_id: @user.id)
     unless @user.id == current_user.id

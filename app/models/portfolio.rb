@@ -2,6 +2,7 @@ class Portfolio < ApplicationRecord
 
   attachment :image
   belongs_to :user
+  has_many :pf_reviews, dependent: :destroy
   has_many :tag_maps, dependent: :destroy
   has_many :tags, through: :tag_maps
 

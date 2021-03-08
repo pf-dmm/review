@@ -8,7 +8,7 @@ class User < ApplicationRecord
 
   has_many :messages, dependent: :destroy
   has_many :entries, dependent: :destroy
-  has_one :portfolio
+  has_one :portfolio, dependent: :destroy
 
   def self.search(search)
     if search
