@@ -1,3 +1,28 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.flame23 {
+position: relative;
+margin: 2em auto;
+width: 100%;
+padding: 1em;
+border: 3px solid #b20023;
+border-radius: 8px;
+}
+.flame23 .flame23-title {
+position: absolute;
+display: inline-block;
+top: -13px;
+left: 15px;
+padding: 0 10px;
+line-height: 1;
+font-size: 18px;
+background: #FFF;
+color: #b20023;
+font-weight: bold;
+}
+.flame23 p {
+padding: 15px 20px;
+margin: 0;
+}
