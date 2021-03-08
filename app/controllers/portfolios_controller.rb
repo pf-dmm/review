@@ -16,7 +16,7 @@ class PortfoliosController < ApplicationController
   end
 
   def index
-    @portfolios = Portfolio.all
+    @portfolios = Portfolio.search(params[:search])
   end
 
   def show

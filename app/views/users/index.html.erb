@@ -1,5 +1,11 @@
 <div class="container">
   <div class="row">
+    <div class="row my-5 ml-5">
+      <%= form_tag(portfolios_path, method: :get) do %>
+        <%= text_field_tag :search, '',  placeholder: "メモ" %>
+        <%= submit_tag "検索" %>
+      <% end %>
+    </div>
     <div class="border rounded"></div>
       <% @users.each do |user|%>
         <div class="col-12 d-flex">

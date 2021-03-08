@@ -12,12 +12,11 @@
   <div class="row">
 
     <div class="col-12"><h3>my portfolio</h3></div>
-    <div class="col-12 ml-5"><%= link_to portfolio_path(@user.portfolio) do %><h3><%= @user.portfolio.title %></h3><% end %></div>
+    <div class="col-12 ml-5"><%#= link_to portfolio_path(@user.portfolio) do %><h3><%#= @user.portfolio.title %></h3></div>
   </div>
   
   <div>
     <% unless @user.id == current_user.id %>
-      <% if (current_user.followed_by? @user) && (@user.followed_by? current_user)  %>
       <% if @isRoom == true %>
         <p class="user-show-room"><a href="/rooms/<%= @roomId %>" class="btn btn-primary btn-lg">チャットへ</a>
       <% else %>
@@ -27,7 +26,6 @@
           <% end %>
           <%= f.submit "チャットを始める", class:"btn btn-primary btn-lg user-show-chat"%>
         <% end %>
-      <% end %>
       <% end %>
     <% end %>
   </div>
