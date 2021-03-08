@@ -1,2 +1,9 @@
-<h1>PfReviews#show</h1>
-<p>Find me in app/views/pf_reviews/show.html.erb</p>
+<div class="container">
+  <div class="row d-block">
+    <%= @pf_review.portfolio.title%>へのレビュー
+    <div>よかった点<%= @pf_review.good_point %></div>
+    <div>悪かった点<%= @pf_review.bad_point %></div>
+    <div>学べたこと<%= @pf_review.learn_from %></div>
+    <div>その他<%= @pf_review.others %></div>
+  </div>
+</div>

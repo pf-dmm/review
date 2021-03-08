@@ -44,17 +44,16 @@
             <% @review_from_me.each do |pf_review| %>
             <% if pf_review.review_each_other %>
               <div class="col-8 border d-flex">
-                <% user = User.find(pf_review.reviewed_user_id) %>
-                <div><%= attachment_image_tag user, :profile_image, size: "50x50", fallback: "no-user-image.png" %></div>
-                <div class="review"><%= user.portfolio.title %></div>
-                <div class="title"><%= user.name %>さんへのレビュー</div>
+                <% user1 = User.find(pf_review.reviewer_user_id) %>
+                <div><%= attachment_image_tag user1, :profile_image, size: "50x50", fallback: "no-user-image.png" %></div>
+                <div class="title"><%= pf_review.portfolio.title %>へのレビュー</div>
                 <div class="check"><%= link_to "レビューを確認する", pf_review_path(pf_review), class: "btn btn-success" %></div>
               </div>
             <% else %>
               <div class="col-8 border d-flex">
-                <% user = User.find(pf_review.reviewer_user_id) %>
-                <div><%= attachment_image_tag user, :profile_image, size: "50x50", fallback: "no-user-image.png" %></div>
-                <div class="review"><%= user.portfolio.title %>へのレビュー</div>
+                <% user2 = User.find(pf_review.reviewed_user_id) %>
+                <div><%= attachment_image_tag user2, :profile_image, size: "50x50", fallback: "no-user-image.png" %></div>
+                <div class="review"><%= pf_review.portfolio.title %>へのレビュー</div>
                 <div><p class="btn btn-danger">レビュー待ち</p></div>
               </div>
             <% end %>
