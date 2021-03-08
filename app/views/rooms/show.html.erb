@@ -6,6 +6,7 @@
   <% if @messages.present? %>
     <% @messages.each do |message| %>
       <strong><%= message.content %></strong>
+      <small><%= message.created_at %></small>
       <small>by <a href="/users/<%= message.user_id %>"><%= message.user.name %>さん</a></small>
     <% end %>
   <% else %>

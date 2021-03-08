@@ -22,7 +22,7 @@ class Portfolio < ApplicationRecord
 
   def self.search(search)
     if search
-      Portfolio.where("name LINK?", "%#{search}%")
+      Portfolio.where("title LIKE?", "%#{search}%")
     else
       Portfolio.all
     end
