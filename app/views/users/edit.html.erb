@@ -1,9 +1,11 @@
 <div class="container">
-  <div class="row mt-5">
+  <div class="row">
 
     <div class="col-12">
-      <div class="setting-right p-4 ">
-        <div class="edit-title"><span class="d-flex justify-content-center font-weight-bold">プロフィール編集</span></div>
+        <div class="selected-item">
+          <a class="selected-title pl-5">マイページ編集</a><br />
+        </div>
+
         <div class="p-3">
           <%= form_with model: @user, local: true do |f|%>
             <div><%= attachment_image_tag @user, :profile_image, size: "80x80", fallback: "no-user-image.png" %></div>

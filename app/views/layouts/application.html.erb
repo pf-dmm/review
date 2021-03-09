@@ -4,54 +4,68 @@
     <title>Review</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/">PORTA</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
+
     <% if user_signed_in? %>
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <%= link_to 'ユーザ一覧', users_path, class: "nav-item nav-link " %>
-      </li>
-      <li class="nav-item">
-        <%= link_to 'ポートフォリオ一覧', portfolios_path, class: "nav-item nav-link " %>
-      </li>
-      <li class="nav-item">
-        <%= link_to 'マイページ', user_path(current_user), class: "nav-item nav-link " %>
-      </li>
-      <li class="nav-item">
-        <%= link_to 'PF投稿', new_portfolio_path, class: "nav-item nav-link " %>
-      </li>
-      <li class="nav-item">
-        <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "nav-item nav-link " %>
-      </li>
-    </ul>
+      <div class="header-top">
+        <% if user_signed_in? %>
+        <%= link_to destroy_user_session_path, method: :delete, class: "top-link pt-3" do %>ログアウト<% end %>
+        <% end %>
+        <p class="header-icon pl-5" href="/">PORTA</p>
+      </div>
+
+      <div class="header-low">
+        <nav class="navbar navbar-expand-lg navbar-light">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <%= link_to 'ポートフォリオ一覧', portfolios_path, class: "nav-item nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'マイページ', user_path(current_user), class: "nav-item nav-link " %>
+              </li>
+              <li class="nav-item dropdown">
+            <a class="nav-link" data-toggle="dropdown" href="#" role="button" >通知</a>
+            <div class="dropdown-menu dropdown-menu-notifications">
+              <div class="ml-3">
+                <% notifications = @notifications.where.not(visitor_id: current_user.id) %>
+                <% if notifications.exists? %>
+                    <%= render partial: "portfolios/notification", collection: @notifications %>
+                <% else %>
+                    <p>通知はありません</p>
+                <% end %>
+              </div>
+              <% @review_to_me = PfReview.where(reviewed_user_id: current_user) %>
+            　<% @review_to_me_unreview = @review_to_me.select { |review| review.review_each_other == false } %>
+              　<% @review_to_me_unreview.each do |review| %>
+              　<div class="d-flex ml-3">
+              　 <% user = User.find( review.reviewer_user_id) %>
+              　 <div class="notification-user-image"><%= attachment_image_tag user,:profile_image, fallback: "no-user-image.png", size:"50x50", class:"fallback" %></div>
+              　 <div class="notification-user-text"> <%= link_to portfolio_path(user.portfolio.id),class: "danger" do %><%= user.name %><% end %>さんからのレビューに<br />返信してください</div>
+              　<% end %>
+              　</div>
+            </div>
+        </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
     <% else %>
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <%= link_to 'トップ', root_path, class: "nav-item nav-link " %>
-      </li>
-      <li class="nav-item">
-        <%= link_to 'アバウト', class: "nav-item nav-link " %>
-      </li>
-      <li class="nav-item">
-        <%= link_to 'ログイン', new_user_session_path, class: "nav-item nav-link " %>
-      </li>
-      <li class="nav-item">
-        <%= link_to '管理者ログイン', new_admin_session_path, class: "nav-item nav-link " %>
-      </li>
-    </ul>
-    <% end %>
+    <div class="header-top">
+      <%= link_to new_user_session_path, class: "top-link pt-3" do %>ログイン<% end %>
+      <%= link_to new_user_registration_path, class: "top-link pt-3" do %>新規登録<% end %>
+      <p class="header-icon pl-5" href="/">PORTA</p>
     </div>
-  </nav>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>

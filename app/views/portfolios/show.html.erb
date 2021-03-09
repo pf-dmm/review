@@ -1,22 +1,28 @@
-<div class="container">
-  <div class="row d-flex justify-content-center">
-    <div class="col-6">
-      <h3>ポートフォリオ名</h3>
-      <div><%= @portfolio.title %></div>
+
+
+<div class="selected-item">
+  <a class="selected-title pl-5"><%= @portfolio.title %> の詳細</a>
+</div>
+
+
+
+<div class="container pb-5">
+  <div class="justify-content-center">
+    <div>
+      <%= attachment_image_tag @portfolio, :image, size: "400x300", fallback: "no-image.jpg", class:"pl-2" %>
     </div>
-    <div class="col-6">
-      <div><%= @portfolio.title %><%= attachment_image_tag @portfolio, :image, size: "100x100", fallback: "no-image.jpg" %></div>
+    <div class="py-2">
+      <h3>制作者</h3>
+      <%= link_to @portfolio.user.name, user_path(@user) %>
     </div>
-    <div class="col-6">
-      <div>
+    <div class="py-2">
+      <h3>タグ</h3>
         <% @portfolio.tags.each do |tag| %>
           <%= tag.tag_name %>
         <% end %>
-    　</div>
     </div>
-    <div class="col-12">
-      <h4>ステータス</h4>
-      <div>
+    <div class="py-2">
+      <h3>ステータス</h3>
         <% if @portfolio.signin_ok == true %>
           <span class="badge badge-success">ログインOK</span>
         <% else %>
@@ -37,43 +43,53 @@
         <% else %>
           <span class="badge badge-danger">公開NG</span>
         <% end %>
-      </div>
     </div>
-    <div class="col-12">
+    <div class="py-2">
       <h3>サイトURL</h3>
-      <div><%= @portfolio.site_url %></div>
+      <%= @portfolio.site_url %>
     </div>
-    <div class="col-12">
+    <div class="py-2">
       <h3>github URL</h3>
       <div><%= @portfolio.git_hub_url %></div>
     </div>
-    <div class="col-12">
+    <div class="py-2">
       <h3>制作背景</h3>
       <div><%= @portfolio.background_story %></div>
     </div>
-    <div class="col-12">
+    <div class="py-2">
       <h3>ターゲット</h3>
       <div><%= @portfolio.target %></div>
     </div>
-    <div class="col-12">
+    <div class="py-2">
       <h3>工夫した点</h3>
       <div><%= @portfolio.ingenuity_point %></div>
     </div>
-    <div class="col-12">
+    <div class="py-2">
       <h3>苦労した点</h3>
       <div><%= @portfolio.difficult_point %></div>
     </div>
-    <div class="col-12">
+    <div class="py-2">
       <h3>学んだこと</h3>
       <div><%= @portfolio.learn_point %></div>
     </div>
-    <div class="col-12">
+    <div class="py-2">
       <h3>今後実装したい機能</h3>
       <div><%= @portfolio.wanna_install %></div>
     </div>
-    <div class="col-12">
+    <div class="py-2">
       <h3>レビュー者に伝えたいこと</h3>
       <div><%= @portfolio.remarks %></div>
     </div>
+  </div>
+  <div class="py-2 d-flex justify-content-end">
+    <% if @portfolio.user_id == current_user.id %>
+      <%= link_to "編集する", edit_portfolio_path(@portfolio), class:"btn btn-success" %>
+    <% else %>
+      <% if @portfolio.pf_reviews.where(reviewer_user_id: current_user.id).any? %>
+        <div class="btn btn-dark">レビュー済み</div>
+      <% else %>
+        <%= link_to "このPFをレビューする", new_pf_review_path(portfolio_id: @portfolio.id), class:"btn btn-danger" %>
+      <% end %>
+    <% end %>
   </div>
 </div>

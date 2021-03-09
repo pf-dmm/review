@@ -1,4 +1,8 @@
 class PortfoliosController < ApplicationController
+  before_action :authenticate_user!, except: :index
+  before_action :configure_post, only: [:show, :edit]
+  protect_from_forgery :except => [:create]
+
   def new
     @portfolio = Portfolio.new
   end
@@ -16,14 +20,22 @@ class PortfoliosController < ApplicationController
   end
 
   def index
-    @portfolios = Portfolio.all
+    @portfolios = Portfolio.search(params[:search])
+    @range = params[:renge]
+    if @range == "ポートフォリオ名"
+      @portfolios = Portfolio.search(params[:search])
+    else
+      @tags = Tag.search(params[:search])
+    end
   end
 
   def show
     @portfolio = Portfolio.find(params[:id])
+    @user = @portfolio.user
   end
 
   def edit
+    @portfolio = Portfolio.find(params[:id])
   end
 
   private

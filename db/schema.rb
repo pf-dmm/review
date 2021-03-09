@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_04_130000) do
+ActiveRecord::Schema.define(version: 2021_03_08_225409) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -24,6 +24,15 @@ ActiveRecord::Schema.define(version: 2021_03_04_130000) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "entries", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "room_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_entries_on_room_id"
+    t.index ["user_id"], name: "index_entries_on_user_id"
+  end
+
   create_table "messages", force: :cascade do |t|
     t.integer "user_id"
     t.integer "room_id"
@@ -34,16 +43,28 @@ ActiveRecord::Schema.define(version: 2021_03_04_130000) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.integer "visitor_id"
+    t.integer "visited_id"
+    t.integer "room_id"
+    t.integer "message_id"
+    t.string "action"
+    t.boolean "checked"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "pf_reviews", force: :cascade do |t|
     t.integer "reviewer_user_id", null: false
     t.integer "reviewed_user_id", null: false
-    t.integer "port_folio_id", null: false
+    t.integer "portfolio_id", null: false
     t.text "good_point", null: false
     t.text "bad_point", null: false
     t.text "learn_from", null: false
     t.text "others"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "review_each_other", default: false, null: false
   end
 
   create_table "portfolios", force: :cascade do |t|
