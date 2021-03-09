@@ -21,11 +21,12 @@ class PortfoliosController < ApplicationController
 
   def index
     @portfolios = Portfolio.all
-    if @renge = params[:renge]
-      if @renge == "ポートフォリオ名"
-        @portfolios = Portfolio.search(params[:search])
-      else
+    if params[:search].present?
+      @renge = params[:renge]
+      if @renge == "タグ名"
         @tags = Tag.search(params[:search])
+      else
+        @portfolios = Portfolio.search(params[:search])
       end
     end
   end
