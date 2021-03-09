@@ -21,6 +21,7 @@ class PortfoliosController < ApplicationController
 
   def index
     @portfolios = Portfolio.search(params[:search])
+    @notifications = current_user.passive_notifications
   end
 
   def show

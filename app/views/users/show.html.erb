@@ -50,7 +50,7 @@
                 <% user = User.find(pf_review.reviewer_user_id) %>
                 <div><%= attachment_image_tag user, :profile_image, size: "75x75", fallback: "no-user-image.png" %></div>
                 <div class="title"><div class="d-flex justify-content-center text-align-center mt-4"><%= user.name %>さんからのレビュー</div></div>
-                <div class="check ml-1 mt-3"><%= link_to "レビューを確認する", pf_review_path(pf_review), class: "btn btn-dark" %></div>
+                <div class="check ml-1 mt-3"><%= link_to "確認する", pf_review_path(pf_review), class: "btn btn-dark" %></div>
               </div>
             <% else %>
               <div class="w-100 d-flex text-align-center">
@@ -69,27 +69,29 @@
                 <% user1 = User.find(pf_review.reviewer_user_id) %>
                 <div><%= attachment_image_tag user1.portfolio, :image, size: "75x75", fallback: "no-image.jpg" %></div>
                 <div class="title ml-1 mt-4 d-flex justify-content-center text-align-center"><p><%= pf_review.portfolio.title %>へのレビュー</p></div>
-                <div class="check"><%= link_to "レビューを確認する", pf_review_path(pf_review), class: "btn btn-dark ml-1 mt-3" %></div>
+                <div class="check"><%= link_to "確認する", pf_review_path(pf_review), class: "btn btn-dark ml-1 mt-3" %></div>
               </div>
             <% else %>
               <div class="w-100 d-flex text-align-center">
                 <% user2 = User.find(pf_review.reviewed_user_id) %>
                 <div><%= attachment_image_tag user2.portfolio, :image, size: "75x75", fallback: "no-image.jpg" %></div>
                 <div class="title d-flex justify-content-center ml-1 mt-4"><%= pf_review.portfolio.title %>へのレビュー</div>
-                <div><p class="btn btn-danger ml-1 mt-3">レビュー待ち</p></div>
+                <div><p class="btn btn-danger ml-1 mt-3">レビュー返信待ち</p></div>
               </div>
             <% end %>
             <% end %>
           </div>
           <div class="content3" id="tab03">
           <% @review_to_me.each do |pf_review| %>
-            <% if pf_review.review_each_other == false %>
-              <div class="w-100 d-flex">
-                <% user = User.find(pf_review.reviewer_user_id) %>
-                <div><%= attachment_image_tag user, :profile_image, size: "50x50", fallback: "no-user-image.png" %></div>
-                <div class="title"><%= user.name %>さんからのレビュー</div>
-                <div class="check"><%= link_to "レビューを返す", new_pf_review_path(portfolio_id: user.portfolio.id), class: "btn btn-danger" %></div>
-              </div>
+          <% if @review_to_me.any? { |review| review.review_each_other == false } %>
+              <% if pf_review.review_each_other == false %>
+                <div class="w-100 d-flex">
+                  <% user = User.find(pf_review.reviewer_user_id) %>
+                  <div><%= attachment_image_tag user, :profile_image, size: "50x50", fallback: "no-user-image.png" %></div>
+                  <div class="title"><%= user.name %>さんからのレビュー</div>
+                  <div class="check"><%= link_to "レビューを返す", new_pf_review_path(portfolio_id: user.portfolio.id), class: "btn btn-danger" %></div>
+                </div>
+              <% end %>
             <% else %>
             未返信のレビューはありません
             <% end %>

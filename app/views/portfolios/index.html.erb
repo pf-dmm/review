@@ -21,6 +21,13 @@
         <li class="nav-item">
           <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "nav-item nav-link " %>
         </li>
+        <li class="nav-item dropdown">
+          <% @review_to_me = PfReview.where(reviewed_user_id: current_user) %>
+          　<% if @review_to_me.any? { |review| review.review_each_other == false } %>
+              <%= link_to '未返信のレビューあり', user_path(current_user), class: "btn btn-danger mt-1" %>
+            <% else %>
+            <% end %>
+        </li>
       </ul>
     </div>
   </nav>
