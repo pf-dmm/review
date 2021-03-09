@@ -19,14 +19,10 @@ class ApplicationController < ActionController::Base
             admin_portfolios_path
         end
       portfolios_path
-    end
+  end
 
     def after_sign_out_path_for(resource)
-        case resource
-          when :admin
-            new_admin_session_path
-        end
-      portfolios_path
+          root_path
     end
 
   def configure_post

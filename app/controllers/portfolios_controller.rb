@@ -23,7 +23,7 @@ class PortfoliosController < ApplicationController
     @portfolios = Portfolio.search(params[:search])
     @notifications = current_user.passive_notifications
     @range = params[:renge]
-    if @range == "Title" 
+    if @range == "ポートフォリオ名" 
       @portfolios = Portfolio.search(params[:search])
     else
       @tags = Tag.search(params[:search])

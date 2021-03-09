@@ -1,29 +1,6 @@
-<div class="header-top pt-2">
-  <%= link_to 'マイページ', user_path(current_user), class: "top-link pt-3" %>
-  <p class="header-icon pl-5" href="/">PORTA</p>
+<div class="selected-item">
+  <a class="selected-title pl-5">ポートフォリオの編集</a><br />
 </div>
-
-<div class="header-low">
-  <nav class="navbar navbar-expand-lg navbar-light">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav active">
-        <li class="nav-item">
-          <%= link_to 'ポートフォリオ一覧', portfolios_path, class: "nav-item nav-link " %>
-        </li>
-        <li class="nav-item">
-          <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "nav-item nav-link " %>
-        </li>
-      </ul>
-    </div>
-  </nav>
-</div>
-
- <div class="selected-item">
-    <a class="selected-title pl-5">ポートフォリオの編集</a><br />
-  </div>
 
 
 <div class="container px-5 pb-5 pf-form">
