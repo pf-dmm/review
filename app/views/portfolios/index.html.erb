@@ -6,8 +6,8 @@
   <div>
     <%= form_tag(portfolios_path, method: :get) do  %>
     <div class="input-group my-2 mx-auto px-5">
-      <%= text_field_tag :search, '',  placeholder: "Search Portfolios", class: "form-control form-control" %>
-      <%= select_tag :range, options_for_select([["Title"],["Tag"]]) %>
+      <%= text_field_tag :search, '',  placeholder: "Search Portfolios", class: "form-control" %>
+      <%= select_tag :renge, options_for_select([["ポートフォリオ名"],["タグ名"]]) %>
         <span class="input-group-btn">
         <%= submit_tag "検索", class: "btn btn-primary" %>
         </span>
@@ -17,7 +17,7 @@
 
   <div>
     <ul class="pf-list d-flex justify-content-center pt-5">
-      <% if @renge == "Title" %>
+      <% if @renge == "ポートフォリオ名" %>
         <% @portfolios.each do |portfolio| %>
           <li><%= link_to portfolio_path(portfolio) do %><%= attachment_image_tag portfolio,:image, fallback: "no-image.jpg", size:"300x225", class:"fallback" %> <% end %><br />
           <b><%= portfolio.title %></b><br />
