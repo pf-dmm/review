@@ -4,13 +4,13 @@
     <title>Review</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    
+
     <% if user_signed_in? %>
       <div class="header-top">
         <% if user_signed_in? %>
@@ -33,12 +33,27 @@
                 <%= link_to 'マイページ', user_path(current_user), class: "nav-item nav-link " %>
               </li>
               <li class="nav-item dropdown">
-                <% @review_to_me = PfReview.where(reviewed_user_id: current_user) %>
-                　<% if @review_to_me.any? { |review| review.review_each_other == false } %>
-                    <%= link_to '未返信のレビューあり', user_path(current_user), class: "btn btn-danger mt-1" %>
-                  <% else %>
-                  <% end %>
-              </li>
+            <a class="nav-link" data-toggle="dropdown" href="#" role="button" >通知</a>
+            <div class="dropdown-menu dropdown-menu-notifications">
+              <div class="d-flex ml-3">
+                <% notifications = @notifications.where.not(visitor_id: current_user.id) %>
+                <% if notifications.exists? %>
+                    <%= render partial: "portfolios/notification", collection: @notifications %>
+                <% else %>
+                    <p>通知はありません</p>
+                <% end %>
+              </div>
+              <% @review_to_me = PfReview.where(reviewed_user_id: current_user) %>
+            　<% @review_to_me_unreview = @review_to_me.select { |review| review.review_each_other == false } %>
+              　<% @review_to_me_unreview.each do |review| %>
+              　<div class="d-flex ml-3">
+              　 <% user = User.find( review.reviewer_user_id) %>
+              　 <div class="notification-user-image"><%= attachment_image_tag user,:profile_image, fallback: "no-user-image.png", size:"50x50", class:"fallback" %></div>
+              　 <div class="notification-user-text"> <%= link_to portfolio_path(user.portfolio.id),class: "danger" do %><%= user.name %><% end %>さんからのレビューに返信してください</div>
+              　<% end %>
+              　</div>
+            </div>
+        </li>
             </ul>
           </div>
         </nav>
@@ -50,7 +65,7 @@
       <p class="header-icon pl-5" href="/">PORTA</p>
     </div>
     <% end %>
-    
+
     <%= yield %>
   </body>
 </html>

@@ -1,6 +1,6 @@
 class PortfoliosController < ApplicationController
+  before_action :authenticate_user!, except: :index
   before_action :configure_post, only: [:show, :edit]
-  before_action :authenticate_user!
   protect_from_forgery :except => [:create]
 
   def new
@@ -21,9 +21,8 @@ class PortfoliosController < ApplicationController
 
   def index
     @portfolios = Portfolio.search(params[:search])
-    @notifications = current_user.passive_notifications
     @range = params[:renge]
-    if @range == "ポートフォリオ名" 
+    if @range == "ポートフォリオ名"
       @portfolios = Portfolio.search(params[:search])
     else
       @tags = Tag.search(params[:search])
