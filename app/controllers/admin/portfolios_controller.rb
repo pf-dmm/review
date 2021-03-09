@@ -15,4 +15,13 @@ class Admin::PortfoliosController < ApplicationController
     def update
     end
 
+    def destroy
+      portfolio = Portfolio.find(params[:id])
+      if portfolio.delete
+        redirect_to admin_portfolios_path
+      else
+        render :index
+      end
+    end
+
 end

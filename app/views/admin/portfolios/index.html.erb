@@ -14,6 +14,7 @@
         <tr>
           <th scope="row"><%= portfolio.id %></th>
           <td><%= link_to admin_portfolios_path(portfolio.id) do %><%= portfolio.title %><% end %></td>
+          <td><%= link_to "削除する", admin_portfolio_path(portfolio.id),method: :delete, class: "btn btn-danger" %></td>
         </tr>
         <% end %>
       </tbody>
