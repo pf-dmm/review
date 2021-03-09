@@ -1,6 +1,6 @@
 <div class="header-top">
   <% if user_signed_in? %>
-  <%= link_to user_path(current_user), class: "top-link" do %>マイページ<% end %>
+  <%= link_to user_path(current_user), class: "top-link pt-3" do %>マイページ<% end %>
   <% end %>
   <p class="header-icon pl-5" href="/">PORTA</p>
 </div>
@@ -33,24 +33,39 @@
 
   <div class="selected-item">
     <a class="selected-title pl-5">ポートフォリオ一覧</a><br />
-    なぜ多くのポートフォリオに触れることが良いのか？を書く
+    <a class="pl-5">アプリ名とタグ名で検索ができます</a>
   </div>
 
-
-  <div class="my-2 mx-5">
-    <%= form_tag(portfolios_path, method: :get) do %>
-      <%= text_field_tag :search, '',  placeholder: "Search Portfolios", class: "form-control form-control-lg" %>
-        <%= submit_tag "検索" %>
-    <% end %>
+  <div>
+    <%= form_tag(portfolios_path, method: :get) do  %>
+    <div class="input-group my-2 mx-auto px-5">
+      <%= text_field_tag :search, '',  placeholder: "Search Portfolios", class: "form-control form-control" %>
+      <%= select_tag :range, options_for_select([["Title"],["Tag"]]) %>
+        <span class="input-group-btn">
+        <%= submit_tag "検索", class: "btn btn-primary" %>
+        </span>
+      <% end %>
+    </div>
   </div>
 
   <div>
     <ul class="pf-list d-flex justify-content-center pt-5">
-      <% @portfolios.each do |portfolio| %>
-        <li><%= link_to portfolio_path(portfolio) do%><%= attachment_image_tag portfolio,:image, fallback: "no-image.png", size:"300x225", class:"fallback" %> <% end %><br />
-        <b><%= portfolio.title %></b><br />
-        <%= portfolio.user.name %><br />
-        <%= portfolio.created_at.strftime("%Y年%m月%d日") %></li>
+      <% if @renge == "Title" %>
+        <% @portfolios.each do |portfolio| %>
+          <li><%= link_to portfolio_path(portfolio) do %><%= attachment_image_tag portfolio,:image, fallback: "no-image.png", size:"300x225", class:"fallback" %> <% end %><br />
+          <b><%= portfolio.title %></b><br />
+          <%= portfolio.user.name %><br />
+          <%= portfolio.created_at.strftime("%Y年%m月%d日") %></li>
+        <% end %>
+      <% else %>
+        <% @tags.each do |tag| %>
+          <% tag.portfolios.each do |portfolio| %>
+          <li><%= link_to portfolio_path(portfolio) do %><%= attachment_image_tag portfolio,:image, fallback: "no-image.png", size:"300x225", class:"fallback" %> <% end %><br />
+          <b><%= portfolio.title %></b><br />
+          <%= portfolio.user.name %><br />
+          <%= portfolio.created_at.strftime("%Y年%m月%d日") %></li>
+          <% end %>
+        <% end %>
       <% end %>
     </ul>
   </div>

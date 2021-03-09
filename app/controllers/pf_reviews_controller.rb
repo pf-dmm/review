@@ -31,6 +31,7 @@ class PfReviewsController < ApplicationController
   end
 
   def index
+    @pf_review = PfReview.all
   end
 
   def edit

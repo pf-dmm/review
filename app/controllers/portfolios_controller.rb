@@ -22,13 +22,21 @@ class PortfoliosController < ApplicationController
   def index
     @portfolios = Portfolio.search(params[:search])
     @notifications = current_user.passive_notifications
+    @range = params[:renge]
+    if @range == "Title" 
+      @portfolios = Portfolio.search(params[:search])
+    else
+      @tags = Tag.search(params[:search])
+    end
   end
 
   def show
     @portfolio = Portfolio.find(params[:id])
+    @user = @portfolio.user
   end
 
   def edit
+    @portfolio = Portfolio.find(params[:id])
   end
 
   private
