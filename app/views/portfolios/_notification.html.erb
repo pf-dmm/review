@@ -7,6 +7,6 @@
  <%= link_to room_path(notification.room.id) do %><%= visitor.name %>さんから<% end %>
  <% if notification.action=='dm' %>メッセージが届いています<% end %>
 </div>
-<div>
+<div class="pr-5 pb-2 d-flex justify-content-end">
  <%= link_to notifications_path(notification.id), method: :delete do%><i class="fas fa-trash-alt"></i><% end %>
 </div>
