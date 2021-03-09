@@ -1,9 +1,29 @@
+ <div class="selected-item">
+    <a class="selected-title pl-5"><%= @pf_review.portfolio.title %>に対するレビュー</a><br />
+  </div>
+
 <div class="container">
   <div class="row d-block">
-    <%= @pf_review.portfolio.title%>へのレビュー
-    <div>よかった点<%= @pf_review.good_point %></div>
-    <div>悪かった点<%= @pf_review.bad_point %></div>
-    <div>学べたこと<%= @pf_review.learn_from %></div>
-    <div>その他<%= @pf_review.others %></div>
+    <div class="col-12">
+      <h3>よかった点</h3>
+      <p class="  w-80 mx-5 p-2"><%= @pf_review.good_point %></p>
+    </div>
+    <div class="col-12">
+      <h3>悪かった点</h3>
+      <p class="  w-80 mx-5 p-2"><%= @pf_review.bad_point %></p>
+    </div>
+    <div class="col-12">
+      <h3>学べたこと</h3>
+      <p class="  w-80 mx-5 p-2"><%= @pf_review.learn_from %></p>
+    </div>
+    <div class="col-12">
+      <h3>その他</h3>
+      <p class="  w-80 mx-5 p-2"><%= @pf_review.others %></p>
+    </div>
+    <div>
+      <% if @pf_review.reviewer_user_id == current_user.id %>
+        <%= link_to "レビューを編集する", edit_pf_review_path(@pf_review) %>
+      <% end %>
+    </div>
   </div>
 </div>

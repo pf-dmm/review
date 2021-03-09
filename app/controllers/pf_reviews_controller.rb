@@ -28,6 +28,7 @@ class PfReviewsController < ApplicationController
 
   def show
     @pf_review = PfReview.find(params[:id])
+    @portfolio = Portfolio.find(@pf_review.portfolio_id)
   end
 
   def index
@@ -36,11 +37,15 @@ class PfReviewsController < ApplicationController
 
   def edit
     @pf_review = PfReview.find(params[:id])
+    @portfolio = Portfolio.find(@pf_review.portfolio_id)
   end
 
   def update
     @pf_review = PfReview.find(params[:id])
-    if @pf_review.update
+    @pf_review.reviewer_user_id = current_user.id
+    @pf_review.reviewed_user_id = Portfolio.find(params[:pf_review][:portfolio_id]).user_id
+    @pf_review.portfolio_id = Portfolio.find(params[:pf_review][:portfolio_id]).id
+    if @pf_review.update(pf_review_params)
       redirect_to pf_review_path(@pf_review)
     else
       render "pf_reviews/edit"
@@ -49,6 +54,6 @@ class PfReviewsController < ApplicationController
 
   private
   def pf_review_params
-    params.require(:pf_review).permit(:good_point, :bad_point, :learn_from, :others, :portfolio_id)
+    params.require(:pf_review).permit(:good_point, :bad_point, :learn_from, :others, :portfolio_id, :review_each_other)
   end
 end
