@@ -21,8 +21,8 @@ class PortfoliosController < ApplicationController
 
   def index
     @portfolios = Portfolio.search(params[:search])
-    @range = params[:renge]
-    if @range == "ポートフォリオ名"
+    @renge = params[:renge]
+    if @renge == "ポートフォリオ名"
       @portfolios = Portfolio.search(params[:search])
     else
       @tags = Tag.search(params[:search])
