@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
 
+  delete 'notifications/:id' => "notifications#destroy", as: "notifications"
   root to: 'portfolios#index'
   get "homes/about" => "homes#about"
   devise_for :admins
-  devise_for :users
+  devise_for :users, :controllers => {
+    :registrations => 'users/registrations',
+    :sessions => 'users/sessions'
+  }
   resources :users
   resources :pf_reviews
   resources :portfolios
