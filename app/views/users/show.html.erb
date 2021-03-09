@@ -39,13 +39,12 @@
        <h1><%= @user.portfolio.title%></h1>
        </div>
      </div>
- 
+
   <div class="row">
     <div class="my-page-right-bottom">
       <ul class="tabnav">
-        <li><a href="#tab01"><%#= @user.portfolio.title %>へのレビュー</a></li>
-        <li><a href="#tab02">自分からのレビュー</a></li>
-        <li><a href="#tab03">未返信のレビュー</a></li>
+        <li><a href="#tab01"><%= @user.portfolio.title %>へのレビュー</a></li>
+        <li><a href="#tab02">自分がしたレビュー</a></li>
       </ul>
       <div class="tabcontent">
           <div class="content1" id="tab01">
@@ -85,22 +84,6 @@
               </div>
             <% end %>
             <% end %>
-          </div>
-          <div class="content3" id="tab03">
-          <% @review_to_me.each do |pf_review| %>
-          <% if @review_to_me.any? { |review| review.review_each_other == false } %>
-              <% if pf_review.review_each_other == false %>
-                <div class="w-100 d-flex">
-                  <% user = User.find(pf_review.reviewer_user_id) %>
-                  <div><%= attachment_image_tag user, :profile_image, size: "50x50", fallback: "no-user-image.png" %></div>
-                  <div class="title"><%= user.name %>さんからのレビュー</div>
-                  <div class="check"><%= link_to "レビューを返す", new_pf_review_path(portfolio_id: user.portfolio.id), class: "btn btn-danger" %></div>
-                </div>
-              <% end %>
-            <% else %>
-            未返信のレビューはありません
-            <% end %>
-          <% end %>
           </div>
       </div>
     </div>

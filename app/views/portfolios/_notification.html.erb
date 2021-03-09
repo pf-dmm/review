@@ -1,10 +1,9 @@
 <% visitor = notification.visitor %>
 <% visited = notification.visited %>
-<div>
- <%= link_to user_path(visitor) do %>
-     <%= visitor.name %>さんが
- <% end %>
- <% if notification.action=='dm' %>
-    あなたにDMを送りました
- <% end %>
+<div class="notification-user-image notification-user-image1">
+  <%= attachment_image_tag visitor,:profile_image, fallback: "no-user-image.png", size:"50x50", class:"fallback" %>
+</div>
+<div class="notification-user-text notification-user-text1 ml-3">
+ <%= link_to user_path(visitor) do %><%= visitor.name %>さんから<% end %>
+ <% if notification.action=='dm' %>メッセージが届いています<% end %>
 </div>
