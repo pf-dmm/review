@@ -9,18 +9,18 @@
     <%= form_with model: @pf_review, url: pf_reviews_path, method: :post,local: true do |f|%>
       <div class="form-group py-2">
       <%= f.label "いい点" %> <span class="badge badge-danger">必須</span>
-      <%= f.text_field :good_point, class: "form-control" %>
+      <%= f.text_field :good_point, class: "form-control", placeholder: "デザイン面・機能面どちらも記載お願いします" %>
       <div class="form-group py-2">
       <%= f.label "改善点" %> <span class="badge badge-danger">必須</span>
-      <%= f.text_field :bad_point, class: "form-control" %>
+      <%= f.text_field :bad_point, class: "form-control", placeholder: "デザイン面・機能面どちらも記載お願いします" %>
     </div>
     <div class="form-group py-2">
       <%= f.label "このPFから学べたこと" %> <span class="badge badge-danger">必須</span>
-      <%= f.text_field :learn_from, class: "form-control" %>
+      <%= f.text_field :learn_from, class: "form-control", placeholder: "細かい点でも構いません" %>
     </div>
     <div class="form-group py-2">
       <%= f.label "その他制作者に伝えたいこと" %>
-      <%= f.text_field :others, class: "form-control" %>
+      <%= f.text_field :others, class: "form-control", placeholder: "追加したらいいと思う機能等" %>
     </div>
     </div>
     <%= f.hidden_field :portfolio_id , value: @portfolio.id %>

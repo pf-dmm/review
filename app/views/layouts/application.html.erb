@@ -35,7 +35,7 @@
               <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#" role="button" >通知</a>
             <div class="dropdown-menu dropdown-menu-notifications">
-              <div class="d-flex ml-3">
+              <div class="ml-3">
                 <% notifications = @notifications.where.not(visitor_id: current_user.id) %>
                 <% if notifications.exists? %>
                     <%= render partial: "portfolios/notification", collection: @notifications %>
@@ -49,7 +49,7 @@
               　<div class="d-flex ml-3">
               　 <% user = User.find( review.reviewer_user_id) %>
               　 <div class="notification-user-image"><%= attachment_image_tag user,:profile_image, fallback: "no-user-image.png", size:"50x50", class:"fallback" %></div>
-              　 <div class="notification-user-text"> <%= link_to portfolio_path(user.portfolio.id),class: "danger" do %><%= user.name %><% end %>さんからのレビューに返信してください</div>
+              　 <div class="notification-user-text"> <%= link_to portfolio_path(user.portfolio.id),class: "danger" do %><%= user.name %><% end %>さんからのレビューに<br />返信してください</div>
               　<% end %>
               　</div>
             </div>
