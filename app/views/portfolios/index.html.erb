@@ -17,21 +17,32 @@
 
   <div>
     <ul class="pf-list d-flex justify-content-center pt-5">
-      <% if @renge == "ポートフォリオ名" %>
+
+      <% if @renge.present? %>
+        <% if @renge == "ポートフォリオ名" %>
+          <% @portfolios.each do |portfolio| %>
+            <li><%= link_to portfolio_path(portfolio) do %><%= attachment_image_tag portfolio,:image, fallback: "no-image.jpg", size:"300x225", class:"fallback" %> <% end %><br />
+            <b><%= portfolio.title %></b><br />
+            <%= portfolio.user.name %><br />
+            <%= portfolio.created_at.strftime("%Y年%m月%d日") %></li>
+          <% end %>
+        <% elsif @renge == "タグ名" %>
+          <% if @tags.present? %>
+          <% @tags.each do |tag| %>
+            <% tag.portfolios.each do |portfolio| %>
+            <li><%= link_to portfolio_path(portfolio) do %><%= attachment_image_tag portfolio,:image, fallback: "no-image.jpg", size:"300x225", class:"fallback" %> <% end %><br />
+            <b><%= portfolio.title %></b><br />
+            <%= portfolio.user.name %><br />
+            <%= portfolio.created_at.strftime("%Y年%m月%d日") %></li>
+            <% end %>
+          <% end %>
+          <% end %>
+      <% else %>
         <% @portfolios.each do |portfolio| %>
           <li><%= link_to portfolio_path(portfolio) do %><%= attachment_image_tag portfolio,:image, fallback: "no-image.jpg", size:"300x225", class:"fallback" %> <% end %><br />
           <b><%= portfolio.title %></b><br />
           <%= portfolio.user.name %><br />
           <%= portfolio.created_at.strftime("%Y年%m月%d日") %></li>
-        <% end %>
-      <% else %>
-        <% @tags.each do |tag| %>
-          <% tag.portfolios.each do |portfolio| %>
-          <li><%= link_to portfolio_path(portfolio) do %><%= attachment_image_tag portfolio,:image, fallback: "no-image.jpg", size:"300x225", class:"fallback" %> <% end %><br />
-          <b><%= portfolio.title %></b><br />
-          <%= portfolio.user.name %><br />
-          <%= portfolio.created_at.strftime("%Y年%m月%d日") %></li>
-          <% end %>
         <% end %>
       <% end %>
     </ul>
