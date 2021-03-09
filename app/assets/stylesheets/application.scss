@@ -62,7 +62,10 @@
   .selected-title {
     font-size: 45px;
     font-weight: bold;
-
+  }
+  
+  .image-field {
+    width: 301px;
   }
 
  .nav-link {
@@ -73,6 +76,7 @@
  }
 
  .pf-list {
-   list-style: none;
+  list-style: none;
+  float: left;
+  flex-wrap: wrap;
  }
-

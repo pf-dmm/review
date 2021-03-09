@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root to: 'homes#top'
+  root to: 'portfolios#index'
   get "homes/about" => "homes#about"
   devise_for :admins
   devise_for :users

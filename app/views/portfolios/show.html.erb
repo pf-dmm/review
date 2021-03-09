@@ -1,22 +1,52 @@
-<div class="container">
-  <div class="row d-flex justify-content-center">
-    <div class="col-6">
-      <h3>ポートフォリオ名</h3>
-      <div><%= @portfolio.title %></div>
+<div class="header-top pt-2">
+  <% if user_signed_in? %>
+    <%= link_to user_path(current_user), class: "top-link pt-2" do %>マイページ<% end %>
+  <% end %>
+  <p class="header-icon pl-5" href="/">PORTA</p>
+</div>
+
+<div class="header-low">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <%= link_to 'ポートフォリオ一覧', portfolios_path, class: "nav-item nav-link " %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "nav-item nav-link " %>
+        </li>
+      </ul>
     </div>
-    <div class="col-6">
-      <div><%= @portfolio.title %><%= attachment_image_tag @portfolio, :image, size: "100x100", fallback: "no-image.jpg" %></div>
+  </nav>
+</div>
+
+
+<div class="selected-item">
+  <a class="selected-title pl-5"><%= @portfolio.title %> の詳細</a>
+</div>
+
+
+
+<div class="container pb-5">
+  <div class="justify-content-center">
+    <div>
+      <%= attachment_image_tag @portfolio, :image, size: "400x200", fallback: "no-image.jpg", class:"pl-2" %>
     </div>
-    <div class="col-6">
-      <div>
+    <div class="py-2">
+      <h3>制作者</h3>
+      <%= link_to @portfolio.user.name, user_path(@user) %>
+    </div>
+    <div class="py-2">
+      <h3>タグ</h3>
         <% @portfolio.tags.each do |tag| %>
           <%= tag.tag_name %>
         <% end %>
-    　</div>
     </div>
-    <div class="col-12">
-      <h4>ステータス</h4>
-      <div>
+    <div class="py-2">
+      <h3>ステータス</h3>
         <% if @portfolio.signin_ok == true %>
           <span class="badge badge-success">ログインOK</span>
         <% else %>
@@ -37,46 +67,45 @@
         <% else %>
           <span class="badge badge-danger">公開NG</span>
         <% end %>
-      </div>
     </div>
-    <div class="col-12">
+    <div class="py-2">
       <h3>サイトURL</h3>
-      <div><%= @portfolio.site_url %></div>
+      <%= @portfolio.site_url %>
     </div>
-    <div class="col-12">
+    <div class="py-2">
       <h3>github URL</h3>
       <div><%= @portfolio.git_hub_url %></div>
     </div>
-    <div class="col-12">
+    <div class="py-2">
       <h3>制作背景</h3>
       <div><%= @portfolio.background_story %></div>
     </div>
-    <div class="col-12">
+    <div class="py-2">
       <h3>ターゲット</h3>
       <div><%= @portfolio.target %></div>
     </div>
-    <div class="col-12">
+    <div class="py-2">
       <h3>工夫した点</h3>
       <div><%= @portfolio.ingenuity_point %></div>
     </div>
-    <div class="col-12">
+    <div class="py-2">
       <h3>苦労した点</h3>
       <div><%= @portfolio.difficult_point %></div>
     </div>
-    <div class="col-12">
+    <div class="py-2">
       <h3>学んだこと</h3>
       <div><%= @portfolio.learn_point %></div>
     </div>
-    <div class="col-12">
+    <div class="py-2">
       <h3>今後実装したい機能</h3>
       <div><%= @portfolio.wanna_install %></div>
     </div>
-    <div class="col-12">
+    <div class="py-2">
       <h3>レビュー者に伝えたいこと</h3>
       <div><%= @portfolio.remarks %></div>
     </div>
   </div>
-  <div class="row">
+  <div class="py-2 d-flex justify-content-end">
     <% if @portfolio.user_id == current_user.id %>
       <%= link_to "編集する", edit_portfolio_path(@portfolio), class:"btn btn-success" %>
     <% else %>

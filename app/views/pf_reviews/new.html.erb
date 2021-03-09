@@ -1,21 +1,47 @@
-<div class="container">
+<div class="header-top">
+  <%= link_to 'マイページ', user_path(current_user), class: "top-link pt-3" %>
+  <p class="header-icon pl-5" href="/">PORTA</p>
+</div>
+
+<div class="header-low">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav active">
+        <li class="nav-item">
+          <%= link_to 'ポートフォリオ一覧', portfolios_path, class: "nav-item nav-link " %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "nav-item nav-link " %>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+ <div class="selected-item">
+    <a class="selected-title pl-5"><%= @portfolio.title %>に対するレビュー</a><br />
+  </div>
+
+<div class="container pb-5">
   <div class="row">
     <div class="col-2"></div>
     <div class="col-8">
-      <h1><%= @portfolio.title %>に対するレビュー</h1>
     <%= form_with model: @pf_review, url: pf_reviews_path, method: :post,local: true do |f|%>
-      <div class="form-group">
+      <div class="form-group py-2">
       <%= f.label "いい点" %> <span class="badge badge-danger">必須</span>
       <%= f.text_field :good_point, class: "form-control" %>
-      <div class="form-group">
+      <div class="form-group py-2">
       <%= f.label "改善点" %> <span class="badge badge-danger">必須</span>
       <%= f.text_field :bad_point, class: "form-control" %>
     </div>
-    <div class="form-group">
+    <div class="form-group py-2">
       <%= f.label "このPFから学べたこと" %> <span class="badge badge-danger">必須</span>
       <%= f.text_field :learn_from, class: "form-control" %>
     </div>
-    <div class="form-group">
+    <div class="form-group py-2">
       <%= f.label "その他制作者に伝えたいこと" %>
       <%= f.text_field :others, class: "form-control" %>
     </div>
@@ -26,6 +52,5 @@
     </div>
     <% end %>
     </div>
-    <div class="col-2"></div>
   </div>
 </div>
