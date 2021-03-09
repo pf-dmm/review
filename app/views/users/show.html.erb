@@ -3,7 +3,7 @@
 </div>
 
 <div class="container">
-  <div class="row mt-5">
+  <div class="row mt-1">
   <div class="col-4">
     <div class="my-page-wrapper">
     <div class="my-page-left">
@@ -36,7 +36,7 @@
      <div class="my-pf">
        <div class="flame23">
        <span class="flame23-title">My Portfolio</span>
-       <h1><%= @user.portfolio.title%></h1>
+       <%= link_to portfolio_path(@user.portfolio),class: "Editlink" do%><h1><%= @user.portfolio.title%></h1><% end %>
        </div>
      </div>
 
@@ -70,7 +70,7 @@
             <% @review_from_me.each do |pf_review| %>
             <% if pf_review.review_each_other %>
               <div class="w-100 d-flex">
-                <% user1 = User.find(pf_review.reviewer_user_id) %>
+                <% user1 = User.find(pf_review.reviewed_user_id) %>
                 <div><%= attachment_image_tag user1.portfolio, :image, size: "75x75", fallback: "no-image.jpg" %></div>
                 <div class="title ml-1 mt-4 d-flex justify-content-center text-align-center"><p><%= pf_review.portfolio.title %>へのレビュー</p></div>
                 <div class="check"><%= link_to "確認する", pf_review_path(pf_review), class: "btn btn-dark ml-1 mt-3" %></div>

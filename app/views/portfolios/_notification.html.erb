@@ -1,12 +1,14 @@
 <% visitor = notification.visitor %>
 <% visited = notification.visited %>
-<div class="notification-user-image notification-user-image1">
-  <%= attachment_image_tag visitor,:profile_image, fallback: "no-user-image.png", size:"50x50", class:"fallback" %>
-</div>
-<div class="notification-user-text notification-user-text1 ml-3">
- <%= link_to room_path(notification.room.id) do %><%= visitor.name %>さんから<% end %>
- <% if notification.action=='dm' %>メッセージが届いています<% end %>
-</div>
-<div class="pr-5 pb-2 d-flex justify-content-end">
- <%= link_to notifications_path(notification.id), method: :delete do%><i class="fas fa-trash-alt"></i><% end %>
+<div class="d-flex py-3">
+ <div class="notification-user-image notification-user-image1">
+   <%= attachment_image_tag visitor,:profile_image, fallback: "no-user-image.png", size:"50x50", class:"fallback" %>
+ </div>
+ <div class="notification-user-text notification-user-text1 ml-3">
+  <%= link_to room_path(notification.room.id) do %><%= visitor.name %>さんから<% end %>
+  <% if notification.action=='dm' %>メッセージが<br />届いています<% end %>
+ </div>
+ <div class="pr-5 pb-2 d-flex justify-content-end">
+  <%= link_to notifications_path(notification.id), method: :delete do%><i class="fas fa-trash-alt"></i><% end %>
+ </div>
 </div>
