@@ -15,11 +15,10 @@
 </div>
 
 <div>
-  <%= form_with model:message do |f| %>
+  <%= form_with model: @message do |f| %>
     <%= f.text_field :content, :placeholder => "メッセージを入力してください", :size => 80 %>
-    <% f.hidden_field :room_id, :value => @room.id %>
+    <%= f.hidden_field :room_id, :value => @room.id %>
     <br>
     <%= f.submit "投稿する" %>
   <% end %>
-
 </div>
