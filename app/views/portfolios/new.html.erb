@@ -9,15 +9,15 @@
     <%= form_with model: @portfolio, method: :post, local: true do |f| %>
     <div class="form-group">
       <%= f.label "ポートフォリオ名" %> <span class="badge badge-danger">必須</span><br />
-      <%= f.text_field :title, class: "form-control" %>
+      <%= f.text_field :title,placeholder: "ポートフォリオ名",size: "40x15", class: "form-control" %>
     </div>
     <div class="form-group image-field">
       <%= f.label "イメージ画像" %><br />
       <%= f.attachment_field :image, class: "form-control" %>
     </div>
     <div class="form-group">
-      <%= f.label "タグ" %><br />
-      <%= f.text_field :tag_name, class: "form-control" %>
+      <%= f.label "タグ" %> ※スペースを空けると、一つのタグとして認識されます（最大10個）<br />
+      <%= f.text_field :tag_name, placeholder: "音楽系　SNS　チャット機能　SNS認証　Docker", class: "form-control" %>
     </div>
     <div class="form-group">
     <%= f.label "新規登録してもOK?" %> <span class="badge badge-danger">必須</span>
@@ -42,19 +42,19 @@
 
     <div class="form-group">
       <%= f.label "サイトURL" %> <span class="badge badge-danger">必須</span><br />
-      <%= f.text_field :site_url, class: "form-control" %>
+      <%= f.text_field :site_url, placeholder: "あなたのアプリURL", class: "form-control" %>
     </div>
     <div class="form-group">
       <%= f.label "GitHub URL" %><br />
-      <%= f.text_field :git_hub_url, class: "form-control" %>
+      <%= f.text_field :git_hub_url, placeholder: "https://github.com/~~", class: "form-control" %>
     </div>
     <div class="form-group">
-      <%= f.label "スライド、資料等 URL" %><br />
-      <%= f.text_field :files, class: "form-control" %>
+      <%= f.label "スライド、資料等" %><br />
+      <%= f.text_field :files, placeholder: "グーグルスライドや資料等のレビュー参考にしてほしいURL等", class: "form-control" %>
     </div>
     <div class="form-group">
       <%= f.label "制作背景" %> <span class="badge badge-danger">必須</span><br />
-      <%= f.text_field :background_story, size: "50x2", class: "form-control" %>
+      <%= f.text_area :background_story, size: "50x2", class: "form background_story" %>
     </div>
     <div class="form-group">
       <%= f.label "ターゲット" %> <span class="badge badge-danger">必須</span><br />
@@ -62,26 +62,29 @@
     </div>
     <div class="form-group">
       <%= f.label "工夫した点" %> <span class="badge badge-danger">必須</span><br />
-      <%= f.text_field :ingenuity_point, class: "form-control" %>
+      <%= f.text_area :ingenuity_point, class: "form" %>
     </div>
     <div class="form-group">
       <%= f.label "苦労した点" %> <span class="badge badge-danger">必須</span><br />
-      <%= f.text_field :difficult_point, class: "form-control" %>
+      <%= f.text_area :difficult_point, class: "form" %>
     </div>
     <div class="form-group">
       <%= f.label "学んだこと" %> <span class="badge badge-danger">必須</span><br />
-      <%= f.text_field :learn_point, class: "form-control" %>
+      <%= f.text_area :learn_point, class: "form" %>
     </div>
     <div class="form-group">
       <%= f.label "今後実装したい機能" %> <span class="badge badge-danger">必須</span><br />
-      <%= f.text_field :wanna_install, class: "form-control" %>
+      <%= f.text_area :wanna_install, class: "form" %>
     </div>
     <div class="form-group">
       <%= f.label "レビュー者に伝えたいこと" %><br />
-      <%= f.text_field :remarks, class: "form-control" %>
+      <%= f.text_area :remarks, class: "form" %>
     </div>
-
-    <%= f.check_box :agreement, :as => :boolean, checked:false %>利用規約とプライバシーポリシーに同意する
+　　<div class="check">
+      <p>1 リンクサイトの内容及びリンクサイトをご利用になったことで生じた損害について、当サイトは一切責任を負いかねます。</p>
+      <p>2 リンク先のアクセス権限・セキュリティ管理を確認の上投稿します。</p>
+    </div>
+    <%= f.check_box :agreement, :as => :boolean, checked:false %>上記2つに同意する
 
     <div class="submit_bottom_group d-flex justify-content-end">
     <%= f.submit "入力内容を送信する", class: "btn btn-success" %>
