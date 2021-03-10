@@ -58,6 +58,7 @@ class PortfoliosController < ApplicationController
     :site_url,
     :git_hub_url,
     :files,
+    :over_view,
     :background_story,
     :target,
     :ingenuity_point,
