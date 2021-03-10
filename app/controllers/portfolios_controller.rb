@@ -21,12 +21,11 @@ class PortfoliosController < ApplicationController
 
   def index
     @portfolios = Portfolio.all
-    if params[:search].present?
-      @renge = params[:renge]
-      if @renge == "タグ名"
-        @tags = Tag.search(params[:search])
-      else
+    if @renge = params[:renge]
+      if @renge == "ポートフォリオ名"
         @portfolios = Portfolio.search(params[:search])
+      else
+        @tags = Tag.search(params[:search])
       end
     end
   end
@@ -40,14 +39,21 @@ class PortfoliosController < ApplicationController
     @portfolio = Portfolio.find(params[:id])
   end
 
+  def update
+    portfolio =Portfolio.find(params[:id])
+    if portfolio.update(portfolio_params)
+      redirect_to portfolio_path(portfolio)
+    else
+      render "portfolios/edit"
+    end
+  end
+
   private
   def portfolio_params
     params.require(:portfolio).permit(
     :image,
-    :signin_ok,
     :signup_ok,
     :instance,
-    :share_others,
     :title,
     :site_url,
     :git_hub_url,
