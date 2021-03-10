@@ -1,33 +1,105 @@
- <div class="selected-item">
-    <a class="selected-title pl-5"><%= @portfolio.title %>に対するレビュー</a><br />
-  </div>
+<div class="selected-item">
+  <a class="selected-title pl-5"><%= @portfolio.title %>に対するレビュー</a><br />
+</div>
 
 <div class="container pb-5">
   <div class="row">
-    <div class="col-2"></div>
-    <div class="col-8">
+    <div class="col-6 pr-5">
     <%= form_with model: @pf_review, url: pf_reviews_path, method: :post,local: true do |f|%>
-      <div class="form-group py-2">
-      <%= f.label "いい点" %> <span class="badge badge-danger">必須</span>
-      <%= f.text_area :good_point, class: "form-control", placeholder: "デザイン面・機能面どちらも記載お願いします" %>
-      <div class="form-group py-2">
+      <div class="form-group py-5 mt-2">
+      <%= f.label "良かった点" %> <span class="badge badge-danger">必須</span>
+      <%= f.text_area :good_point, class: "review-form", placeholder: "デザイン面・機能面どちらも記載お願いします" %>
+      <div class="form-group py-3">
       <%= f.label "改善点" %> <span class="badge badge-danger">必須</span>
-      <%= f.text_area :bad_point, class: "form-control", placeholder: "デザイン面・機能面どちらも記載お願いします" %>
+      <%= f.text_area :bad_point, class: "review-form", placeholder: "デザイン面・機能面どちらも記載お願いします" %>
     </div>
     <div class="form-group py-2">
-      <%= f.label "このPFから学べたこと" %> <span class="badge badge-danger">必須</span>
-      <%= f.text_area :learn_from, class: "form-control", placeholder: "細かい点でも構いません" %>
+      <%= f.label "このポートフォリオから学べたこと" %> <span class="badge badge-danger">必須</span>
+      <%= f.text_area :learn_from, class: "review-form", placeholder: "細かい点でも構いません" %>
     </div>
-    <div class="form-group py-2">
+    <div class="form-group pt-2">
       <%= f.label "その他制作者に伝えたいこと" %>
-      <%= f.text_area :others, class: "form-control", placeholder: "追加したらいいと思う機能等" %>
+      <%= f.text_area :others, class: "review-form", placeholder: "追加したらいいと思う機能等" %>
     </div>
     </div>
     <%= f.hidden_field :portfolio_id , value: @portfolio.id %>
-    <div class="submit_bottom_group">
+    <div class="submit_bottom_group py-1">
     <%= f.submit "入力内容を送信する", class: "btn btn-success" %>
     </div>
     <% end %>
+    </div>
+
+    <div class="col-6 pl-5">
+    <div class="py-2">
+      <h3 style="color:red">レビュー時の留意事項</h3>
+      <h6 style="color:red">※必ずご確認のうえ、レビューをお願い致します</h6>
+      <div><%= @portfolio.remarks %></div>
+    </div>
+    <div class="py-2">
+      <h3>制作者</h3>
+      <%= @portfolio.user.name %>
+    </div>
+    <div class="py-2">
+      <h3>タグ</h3>
+        <% @portfolio.tags.each do |tag| %>
+          <%= tag.tag_name %>
+        <% end %>
+    </div>
+    <div class="py-2">
+      <h3>ステータス</h3>
+        <% if @portfolio.signin_ok == true %>
+          <span class="badge badge-success">ログインOK</span>
+        <% else %>
+          <span class="badge badge-danger">ログインNG</span>
+        <% end %>
+        <% if @portfolio.signup_ok == true %>
+          <span class="badge badge-success">新規登録OK</span>
+        <% else %>
+          <span class="badge badge-danger">新規登録NG</span>
+        <% end %>
+        <% if @portfolio.instance == true %>
+          <span class="badge badge-success">サイト閲覧可能状態</span>
+        <% else %>
+          <span class="badge badge-danger">サイト閲覧停止中</span>
+        <% end %>
+        <% if @portfolio.share_others == true %>
+          <span class="badge badge-success">公開OK</span>
+        <% else %>
+          <span class="badge badge-danger">公開NG</span>
+        <% end %>
+    </div>
+    <div class="py-2">
+      <h3>サイトURL</h3>
+      <%= @portfolio.site_url %>
+    </div>
+    <div class="py-2">
+      <h3>github URL</h3>
+      <div><%= @portfolio.git_hub_url %></div>
+    </div>
+    <div class="py-2">
+      <h3>制作背景</h3>
+      <div><%= @portfolio.background_story %></div>
+    </div>
+    <div class="py-2">
+      <h3>ターゲット</h3>
+      <div><%= @portfolio.target %></div>
+    </div>
+    <div class="py-2">
+      <h3>工夫した点</h3>
+      <div><%= @portfolio.ingenuity_point %></div>
+    </div>
+    <div class="py-2">
+      <h3>苦労した点</h3>
+      <div><%= @portfolio.difficult_point %></div>
+    </div>
+    <div class="py-2">
+      <h3>学んだこと</h3>
+      <div><%= @portfolio.learn_point %></div>
+    </div>
+    <div class="py-2">
+      <h3>今後実装したい機能</h3>
+      <div><%= @portfolio.wanna_install %></div>
+    </div>
     </div>
   </div>
 </div>
