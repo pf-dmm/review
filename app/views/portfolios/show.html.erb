@@ -23,11 +23,6 @@
     </div>
     <div class="py-2">
       <h3>ステータス</h3>
-        <% if @portfolio.signin_ok == true %>
-          <span class="badge badge-success">ログインOK</span>
-        <% else %>
-          <span class="badge badge-danger">ログインNG</span>
-        <% end %>
         <% if @portfolio.signup_ok == true %>
           <span class="badge badge-success">新規登録OK</span>
         <% else %>
@@ -37,11 +32,6 @@
           <span class="badge badge-success">サイト閲覧可能状態</span>
         <% else %>
           <span class="badge badge-danger">サイト閲覧停止中</span>
-        <% end %>
-        <% if @portfolio.share_others == true %>
-          <span class="badge badge-success">公開OK</span>
-        <% else %>
-          <span class="badge badge-danger">公開NG</span>
         <% end %>
     </div>
     <div class="py-2">
