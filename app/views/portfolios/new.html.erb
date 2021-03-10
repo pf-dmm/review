@@ -44,6 +44,10 @@
       <%= f.text_field :files, placeholder: "グーグルスライドや資料等のレビュー参考にしてほしいURL等", class: "form-control" %>
     </div>
     <div class="form-group">
+      <%= f.label "サイト概要" %> <span class="badge badge-danger">必須</span><br />
+      <%= f.text_field :over_view, size: "50x2", class: "form-control" %>
+    </div>
+    <div class="form-group">
       <%= f.label "制作背景" %> <span class="badge badge-danger">必須</span><br />
       <%= f.text_area :background_story, size: "50x2", class: "form background_story" %>
     </div>

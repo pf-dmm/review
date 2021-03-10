@@ -47,11 +47,6 @@
     </div>
     <div class="py-2">
       <h3>ステータス</h3>
-        <% if @portfolio.signin_ok == true %>
-          <span class="badge badge-success">ログインOK</span>
-        <% else %>
-          <span class="badge badge-danger">ログインNG</span>
-        <% end %>
         <% if @portfolio.signup_ok == true %>
           <span class="badge badge-success">新規登録OK</span>
         <% else %>
@@ -62,11 +57,6 @@
         <% else %>
           <span class="badge badge-danger">サイト閲覧停止中</span>
         <% end %>
-        <% if @portfolio.share_others == true %>
-          <span class="badge badge-success">公開OK</span>
-        <% else %>
-          <span class="badge badge-danger">公開NG</span>
-        <% end %>
     </div>
     <div class="py-2">
       <h3>サイトURL</h3>
@@ -75,6 +65,10 @@
     <div class="py-2">
       <h3>github URL</h3>
       <div><%= @portfolio.git_hub_url %></div>
+    </div>
+    <div class="py-2">
+      <h3>サイト概要</h3>
+      <div><%= @portfolio.over_view %></div>
     </div>
     <div class="py-2">
       <h3>制作背景</h3>
