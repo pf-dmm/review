@@ -8,11 +8,11 @@
     <div class="col-2"></div>
     <div class="col-8">
       <div class="col-12">
-        <h3>よかった点</h3>
+        <h3>良かった点</h3>
         <p class="  w-80 mx-5 p-2"><%= @pf_review.good_point %></p>
       </div>
       <div class="col-12">
-        <h3>悪かった点</h3>
+        <h3>改善点</h3>
         <p class="  w-80 mx-5 p-2"><%= @pf_review.bad_point %></p>
       </div>
       <div class="col-12">
@@ -20,7 +20,7 @@
         <p class="  w-80 mx-5 p-2"><%= @pf_review.learn_from %></p>
       </div>
       <div class="col-12">
-        <h3>その他</h3>
+        <h3>制作者に伝えたいこと</h3>
         <p class="  w-80 mx-5 p-2"><%= @pf_review.others %></p>
       </div>
     <% if @pf_review.reviewer_user_id == current_user.id %>
