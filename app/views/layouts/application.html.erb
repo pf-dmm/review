@@ -33,25 +33,28 @@
                 <%= link_to 'マイページ', user_path(current_user), class: "nav-item nav-link " %>
               </li>
               <li class="nav-item dropdown">
+            <% notifications = Notification.where.not(visitor_id: current_user.id) %>
+            <% @review_to_me = PfReview.where(reviewed_user_id: current_user) %>
+             <% @review_to_me_unreview = @review_to_me.select { |review| review.review_each_other == false } %>
+            <% if notifications.present? || @review_to_me_unreview.present? %><i class="fa fa-circle notification-mark" style="color: gold;"></i><% end %>
             <a class="nav-link" data-toggle="dropdown" href="#" role="button" >通知</a>
             <div class="dropdown-menu dropdown-menu-notifications">
-              <div class="ml-3">
-                <% notifications = @notifications.where.not(visitor_id: current_user.id) %>
+              <% if notifications.present? || @review_to_me_unreview.present? %>
+              <div class="message-notification ml-3">
                 <% if notifications.exists? %>
                     <%= render partial: "portfolios/notification", collection: @notifications %>
-                <% else %>
-                    <p>通知はありません</p>
                 <% end %>
               </div>
-              <% @review_to_me = PfReview.where(reviewed_user_id: current_user) %>
-            　<% @review_to_me_unreview = @review_to_me.select { |review| review.review_each_other == false } %>
-              　<% @review_to_me_unreview.each do |review| %>
-              　<div class="d-flex ml-3">
+              <% @review_to_me_unreview.each do |review| %>
+              <div class="review-notification d-flex ml-3">
               　 <% user = User.find( review.reviewer_user_id) %>
               　 <div class="notification-user-image"><%= attachment_image_tag user,:profile_image, fallback: "no-user-image.png", size:"50x50", class:"fallback" %></div>
               　 <div class="notification-user-text"> <%= link_to portfolio_path(user.portfolio.id),class: "danger" do %><%= user.name %><% end %>さんからのレビューに<br />返信してください</div>
               　<% end %>
               　</div>
+              　<% else %>
+              　通知はありません
+              　<% end %>
             </div>
         </li>
             </ul>
