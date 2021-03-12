@@ -21,6 +21,12 @@
    padding: 0;
  }
 
+ .notification-mark {
+   position: absolute;
+  top: 15%;
+  left: 65%;
+ }
+
 .tabnav{
   margin: 0;
   padding: 0;
@@ -89,7 +95,7 @@
     text-decoration: none;
     color: black ;
   }
-  
+
 .review-img {
   padding-left: 900px;
 }
