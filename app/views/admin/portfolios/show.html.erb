@@ -1,6 +1,12 @@
 <div class="container">
   <div class="row">
     <div><%= @portfolio.title %></div>
+    <div><%= @portfolio.background_story %></div>
+    <div><%= @portfolio.target %></div>
+    <div><%= @portfolio.ingenuity_point %></div>
+    <div><%= @portfolio.difficult_point %></div>
+    <div><%= @portfolio.learn_point %></div>
+
     <div><%= link_to "削除する", admin_portfolio_path, method: :delete %></div>
 
   </div>
